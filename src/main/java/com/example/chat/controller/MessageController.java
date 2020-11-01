@@ -1,7 +1,9 @@
 package com.example.chat.controller;
 
 import com.example.chat.domain.Message;
+import com.example.chat.domain.Views;
 import com.example.chat.repo.MessageRepo;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,11 +22,13 @@ public class MessageController {
 
 
     @GetMapping
+    @JsonView(Views.IdName.class)
     public List<Message> list() {
         return messageRepo.findAll();
     }
 
     @GetMapping("{id}")
+    @JsonView(Views.IdCreationDate.class)
     public Message getOne(@PathVariable("id") Message message) {
         return message;
     }
